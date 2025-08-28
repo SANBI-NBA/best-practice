@@ -119,9 +119,7 @@ A tricky aspect of `list.files` is that the `pattern` argument expects a regular
 It is possible to find the file by searching for "nlc2022_7class" (without the .tif part) but this will potentially match with multiple files e.g. `nlc2022_7class.csv` or `nlc2022_7class_reprojected.tif`. The search function as coded here is set up to search the entire directory and all subdirectories, finding all files matching the specified pattern.
 
 ::: callout-important
-
 # File naming considerations
 
-For the combination of `Sys.getenv` and `list.files` to work without causing frustrations, it is important that all contributors to the NBA data repository are mindful of potential search problems created by multiple files with similar or the same names stored in different folders. In the code example above the `terra:rast` function will generate an error if `list.files` returns multiple matches.
-
+For the combination of `Sys.getenv` and `list.files` to work it is important that all contributors to the NBA data repository are mindful of potential search problems created by multiple files with similar or the same names stored in different folders. In the code example above the `terra:rast` function will generate an error if `list.files` returns multiple matches.
 :::
