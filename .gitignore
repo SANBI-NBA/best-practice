@@ -56,3 +56,4 @@ rsconnect/
 **/.quarto/
 .Rproj.user
 *_ipynb
+**/*.quarto_ipynb

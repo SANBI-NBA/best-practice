@@ -1,0 +1,124 @@
+---
+title: "Using gitignore to keep repos tidy"
+author: "Lize von Staden"
+format: html
+---
+
+A `.gitignore` file is an essential tool for keeping repositories tidy, and preventing sensitive data or variables such as passwords or authentication tokens from being shared to public repositories. Quarto for example generates many files that enable you to preview your html content, but it is not needed when we compile the website. A `.gitignore` file lets you keep these files for local use on your computer, but prevents it from being shared with other users when you push your commits to the remote repository.
+
+The first step when creating a new repository is to set up a good `.gitignore` file that is aligned with your coding environment. GitHub makes this easy by providing templates for different coding languages. When you are on the configuration page of your new repository, look for the **Add .gitignore** entry. In the drop-down box, select R. This will give you a good basis for R projects that you can then add to as necessary.
+
+![Screenshot from new repository configuration in GitHub](imgs/new-repo-gitignore.PNG)
+
+## How to create a .gitignore in existing repositories
+
+If you already have a repository, but did not create a `.gitignore` when you set it up, it can be added later. An easy way to do it is within an R project. Open any existing R project, and under the Files tab, select New file \> Text File. Name the file `.gitignore`. RStudio will create the file for you (make sure it is stored in the root of your repository). You can also open and edit your `.gitignore` inside RStudio.
+
+![Screenshot of RStudio for creating a gitignore using the Files tab](imgs/rstudio-gitignore.PNG)
+
+## Recommended content for a .gitignore for NBA website content repositories
+
+If you have created a `.gitignore` using GitHub's R template, the following would already be in your file. If you created one using RStudio or any other method, copy this content to your `.gitignore`:
+
+``` {.markdown filename=".gitignore"}
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+.RDataTmp
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+# R Environment Variables
+.Renviron
+
+# pkgdown site
+docs/
+
+# translation temp files
+po/*~
+
+# RStudio Connect folder
+rsconnect/
+```
+
+In addition to the above content, add the following entries to the file. You can copy and paste below the content above:
+
+``` {.markdown filename=".gitignore"}
+# Quarto
+/.quarto/
+*.quarto_ipynb
+
+# Rendered content
+*_files/
+*.html
+
+# Template files
+references.bib
+scientific.qmd
+basic.qmd
+```
+
+We include the template files because they are not needed when we compile the website content, but this allows you to keep them in the local version of your repo for reference.
+
+## How to remove files that have already been committed but should have been ignored
+
+### Step 1: Create or update a .gitignore file
+
+Create a `.gitignore` as described above, or edit one that is already in your repository to include the content above. Save and close
+
+**Step 2: Remove files from the remote repository using git commands**
+
+In the root folder of your repository, right-click and select Open Git Bash here from the drop down menu. This will open terminal window that can process git commands.
+
+To remove all currently tracked files that match your `.gitignore`, enter:
+
+`git rm -r –chached .`
+
+-   `-r` = recursive
+-   `--cached` = stop tracking, but don’t delete locally
+-   `.` = apply to the whole repo
+
+This basically tells Git: *“untrack everything, but don’t touch my working directory.”*
+
+To commit the cleaned up version of your repository, type:
+
+`git commit -m "Removing ignored files from the repository"`
+
+Push the changes to GitHub:
+
+`git push origin main`
+
+-   `origin main` makes sure that the cleanup happens on the main (default) branch of your repository. If you have multiple branches, you have to perform the cleanup operation for each branch individually, otherwise the files might return when you merge. It may be best to first perform merges of all working branches to main before you do this task.
+
+Now, all the files matching your `.gitignore` will be removed from the GitHub repository but remain safely on your computer.
