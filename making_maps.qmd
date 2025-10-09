@@ -1,0 +1,60 @@
+---
+title: "Making Maps for the NBA website"
+author: "Andrew SKowno"
+format: html
+execute:
+  eval: false
+  echo: true
+  output: false
+  warning: false
+  error: false
+---
+
+To ensure the maps contained on the NBA 2025 website are similar in look in feel follow these guidelines:
+
+### 1. Projection 
+
+[Use the NBA Albers Equal Area conic projection for all maps]{.underline} - this maintains the shape of South Africa. Technically for including PEI we need slightly different proj setting (and also for PEI alone another setting) but it is not visibly different at this scale - and no new maps of PEI are being made.
+
+```{r}
+# the proj4 string for NBA projection
+"+proj=aea +lat_0=0 +lon_0=25 +lat_1=-24 +lat_2=-33 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+
+# Load required packages
+library(sf)
+library(tidyverse)
+
+# Example: create some points (longitude, latitude)
+points_df <- data.frame(
+  id = 1:3,
+  lon = c(25, 26, 24.5),
+  lat = c(-25, -26, -27) # giving coordinates in degrees 
+)
+
+# Convert to an sf object
+points_sf <- st_as_sf(points_df, coords = c("lon", "lat"), crs = 4326) # WGS84 unprojected 
+
+# View original coordinates
+points_sf
+
+# Define your Albers Equal Area projection
+nba_proj <- "+proj=aea +lat_0=0 +lon_0=25 +lat_1=-24 +lat_2=-33 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"
+
+# Reproject points to Albers Equal Area
+points_aea <- st_transform(points_sf, crs = nba_proj)
+
+# View transformed coordinates
+points_aea
+```
+
+###  2. Map adornments
+
+[Leave off all scale bars, north arrows and graticules (borders with lat long)]{.underline} - while technically maps require these it is hard to get them to match visually when using multiple programs to make maps (ARCGIS and R etc). We can include a nice map of SA up front in the website that will suffice to show where SA is and how large it is.
+
+### 3. Additional context feature layers
+
+-   Maps should use the SA outline, EEZ, PEI and provincial feature boundaries available on the data site.
+
+-   Be sure to leave Eswatini and Lesotho blank - we are not allowed to include results in these areas in a national state of report.
+
+-   You can leave off provinces for marine, and coastal (if you like) and you can include relevant features (main bathy lines) as required. Features lines apart for SA boundary are up to the designer, but I recommend province boundaries to help users orientate where possible.
