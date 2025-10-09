@@ -12,7 +12,7 @@ execute:
 
 To ensure the maps contained on the NBA 2025 website are similar in look in feel follow these guidelines:
 
-### 1. Projection 
+### 1. Projection
 
 [Use the NBA Albers Equal Area conic projection for all maps]{.underline} - this maintains the shape of South Africa. Technically for including PEI we need slightly different proj setting (and also for PEI alone another setting) but it is not visibly different at this scale - and no new maps of PEI are being made.
 
@@ -47,9 +47,11 @@ points_aea <- st_transform(points_sf, crs = nba_proj)
 points_aea
 ```
 
-###  2. Map adornments
+### 2. Map adornments
 
 [Leave off all scale bars, north arrows and graticules (borders with lat long)]{.underline} - while technically maps require these it is hard to get them to match visually when using multiple programs to make maps (ARCGIS and R etc). We can include a nice map of SA up front in the website that will suffice to show where SA is and how large it is.
+
+Do not add boxes around maps
 
 ### 3. Additional context feature layers
 
