@@ -1,0 +1,12 @@
+---
+title: "Integrated findings"
+title-block-banner: "#adb5bd"
+title-block-banner-color: white
+image: imgs/marcos-paulo-prado-pYW7Qmvro7A-unsplash.jpg
+description: |
+  Headline indicators for species and ecosystems across all realms
+---
+
+![](imgs/marcos-paulo-prado-pYW7Qmvro7A-unsplash.jpg)
+
+All four national headline indicators can only be calculated if the ecosystem types have been surveyed, mapped and classified, and the species have been identified and classified – and this information is as up-to-date as possible and on a national scale. Similarly, other indicators (e.g. genetic indicators) have their own underlying datasets. The NBA therefore acts as a stimulus for updating and releasing datasets that inform the NBA analyses. Each updated national headline indicator is therefore accompanied by an update in these relevant datasets (with the version being specified, see Box 2), which are then served via links off the NBA website to be available for users who wish to undertake their own analyses using NBA data. In summary, the following essential spatial data layers underpin the work of the NBA:

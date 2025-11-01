@@ -1,0 +1,12 @@
+---
+title: "Key messages"
+title-block-banner: "#adb5bd"
+title-block-banner-color: white
+image: imgs/eilis-garvey-yaSlJOszCns-unsplash.jpg
+description: |
+  Guidance for policy and action based on the findings of the NBA
+---
+
+![](imgs/eilis-garvey-yaSlJOszCns-unsplash.jpg)
+
+Always a key tenant of each NBA, the approach to developing and presenting key messages was refined for NBA 2018, and thereafter the approach was published in Mainstreaming Biodiversity Priorities (UNEP-WCMC & SANBI 2022). Reflecting the ‘Making the Case for Biodiversity’20 thinking, each key message from the NBA has three elements: • A finding that is linked to the evidence emerging from the NBA analyses or latest research. The finding is usually illustrated in some way through a graph, map or infographic (and possibly also through a photograph). This paragraph is a brief of what the authors want the target audience to know, and usually includes links to where they can read more detailed information about the finding. • A ‘so-what’ statement that describes why the finding is important. This paragraph explains a bit more about why this finding matters – e.g. What are the economic or emotional values or consequences of the finding? • A ‘call to action’ that describes the practical actions that can be done. This paragraph explains what the target audience can do to make a difference. This positive framing of what can be done inspires action, as opposed to apathy when a message is framed as ‘doom and gloom’ with no solutions presented. Key messages should be as short as possible, and likely consist of only three paragraphs (the three elements described above). In addition, each key message usually has a number, a catchy title, and a short paragraph containing a confidence statement. See Figure 7.

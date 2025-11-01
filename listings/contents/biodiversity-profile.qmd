@@ -1,0 +1,13 @@
+---
+title: "South Africa's biodiversity profile"
+subtitle: "Context"
+title-block-banner: "#adb5bd"
+title-block-banner-color: white
+image: imgs/juanma-clemente-alloza-2fpyPtVcm2M-unsplash.jpg
+description: |
+  Statistics on South Africa's species and ecosystem diversity
+---
+
+![](imgs/juanma-clemente-alloza-2fpyPtVcm2M-unsplash.jpg)
+
+The NBA is a key reference and educational work for use by academics, scientists, students, non-profit organisations and funders. When asked ‘What are the main ways that you used information from the NBA 2018?’, survey respondents ticked the options ‘In presentations about biodiversity (general awareness)’, ‘As part of teaching / education / training’, and ‘To provide an overall biodiversity profile of South Africa’ – illustrating how important the NBA is as a resource for general awareness and education.

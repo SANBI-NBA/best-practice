@@ -1,0 +1,24 @@
+---
+title: "Testing Listings"
+title-block-banner: "#adb5bd"
+title-block-banner-color: white
+toc: false
+
+listing:
+  id: page-listings
+  contents:
+    - contents/biodiversity-profile.qmd
+    - contents/integrated-findings.qmd
+    - contents/key-messages.qmd
+  type: grid
+  fields: [image, title, description]
+  sort: false
+  sort-ui: false
+  filter-ui: false
+  categories: false
+---
+
+This is a test.
+
+::: {#page-listings}
+:::

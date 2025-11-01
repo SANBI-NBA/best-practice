@@ -64,17 +64,15 @@ It is possible to set up this workflow in one repository, as long as your analyt
 ![Example folder structure separating analytical scripts from web (quarto) content](imgs/example-folder-structure.PNG)
 
 ::: {.callout-tip title="Tip: Use relative paths"}
-
 Always use relative paths when passing contents between folders. That way, your code will always work, regardless of where on your or somebody else's computer the repo is set up. For the folder structure above, if you are creating your table, figure, or map in an R script in the folder `analysis`, your path to save to `quarto/data` or `quarto/imgs` would be as follows:
 
-`output_path <- "../quarto/data/"` 
+`output_path <- "../quarto/data/"`
 
 or
 
 `output_path <- "../quarto/imgs/"`
 
 The double dot (`..`) means go up one level relative to your current folder (`analysis`) - in other words to the folder containing both the `quarto` and `analysis` folders, and then look for a path to `quarto/data/` or `quarto/imgs/`.
-
 :::
 
 ## Option 2: Use a script to collect outputs from your analytical repository to your content repository
