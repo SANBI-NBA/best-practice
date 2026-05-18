@@ -1,0 +1,102 @@
+---
+title: "Managing NBA website content updates"
+author: "Lize von Staden"
+format: html
+toc: true
+---
+
+With the NBA going online in 2025, it is now possible to update content, without needing to wait until the next national assessment is due. This means that:
+
+-   Small errors can be corrected almost immediately
+
+-   New data and updated assessments can be published as they become available
+
+-   New content can be added
+
+## Managing the production of new and updated content
+
+### While work is in progress
+
+The NBA website draws from the **main branches** of the content repositories. Every time the website is updated, the latest version of **all** the content repositories are extracted, and added to the new website version. To avoid work in progress ending up on the live NBA website, **all work in progress must be done on feature branches**. Only merge your new content to your main branch when it is ready for publication.
+
+### When updated content is ready for publication
+
+#### Small corrections
+
+If changes are relatively small - fixing of typos and other corrections to content, then nothing further needs to be done.
+
+#### Major content updates
+
+If you make substantial changes to your content such as updating an indicator assessment, adding a new indicator (e.g. for a new taxon group or realm) or publishing a new version of a map, this needs to be appropriately documented as a new content version.
+
+1.  Input data, code, and outputs need to be assigned a new version tag
+
+2.  The content page(s)' publication date must be updated
+
+3.  An announcement must be made in the What's new section of the NBA website
+
+#### New content
+
+All instructions for major content updates apply here as well, with the following addition: if your new content requires changes to the NBA website navigation (the contents bar on the left side of content pages), such as a new page needs to be inserted, then also [post an issue on the nba-website repo](https://github.com/SANBI-NBA/nba-website/issues) with clear instructions on how the navigation section needs to be amended.
+
+## Importance of version management
+
+NBA headline indicators, as well as output data such as maps of threatened ecosystems, feed into various national reporting processes, such as the national State of the Environment Report produced by DFFE, South Africa's country report to the Convention on Biological Diversity, and South Africa's progress towards UN Sustainable Development Goals. For these reports, the specific data and assessment that are cited in these reports need to be traceable to maintain credibility. In the past, the NBA publication was the "one source of truth" for our data and assessments, but with a website where content updates are possible at any time, this one source of truth becomes more challenging to maintain.
+
+Within these reporting obligations it becomes ever more important that we keep track of the following:
+
+-   input datasets - which protected area map version, version of the national integrated ecosystem map or which version of the national plant Red List of Species Status were used in your assessment
+
+-   version of the code that was used to run the analysis - which exact commit was used to produce a specific indicator assessment output
+
+-   assessment outputs that are dated and correctly attributed to its input datasets and code versions
+
+### When should data, code and outputs be versioned
+
+Each time you assess an NBA indicator - either for the first time, or with the intention to update existing NBA content you should version your assessment. This assessment can be triggered by either new input data, such as updated ecosystem maps or species' Red List assessments, or in instances where you have detected errors in your code and you have corrected them. In other words, each time you run an indicator analysis that produces different outputs than what you had before, you need to version that assessment. Assessment versioning need to be recorded as part of assessment metadata when indicators are submitted for the national indicator database, so it is a good idea to implement a system where you do this as part of your assessment process.
+
+### Code releases as immutable methodological snapshots
+
+GitHub provides the functionality to archive a particular commit of your analytical code as a [release](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases). This tags that specific commit as a release and stores a zipped version of the code as it was at that point in time under the Releases section of your repo. This sits separately from your commit history and so will not be influenced by code rollbacks or branch rebases, which can wipe commit histories out. A release can never be changed, only deleted. Within GitHub, there is also functionality to compare code between releases, so that interested users can see exactly what changed since your last assessment.
+
+**It is recommended that you create a release each time you publish a new version of an indicator assessment.**
+
+![Example of a code release stored in GitHub: NBA 2025 launch version](imgs/code-release.PNG){fig-align="center"}
+
+#### How to create a code release
+
+1.  It is recommended that you set up [immutable releases](https://docs.github.com/en/code-security/concepts/supply-chain-security/immutable-releases) - these kinds of releases can never be changed after publication, maintaining the integrity of indicator assessment provenance.
+
+    a.  On the main page of your repository, go to settings
+
+    b.  Scroll to the Releases section, and select **Enable release immutability**
+
+2.  See the [GitHub instructions for how to create a new release](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository#creating-a-release)
+
+3.  You can decide what system to use for numbering your releases (release tags) but it is recommended that you include the publication date, e.g. assessment-2025-12-08
+
+4.  If you follow the GitHub instructions above, it will create a release from the latest commit of the branch you selected. If you want to create a retrospective release, you need to find the commit number (hash) of the commit you want to release in your commit history. Then under Target, paste the commit number into the Target search bar.
+
+::: {.callout-important icon="false"}
+## Important
+
+It is recommended that under the Technical Documentation section of your content page, you link to the release that was used to inform the content, rather than just the main code repository.
+:::
+
+### Linking input data and assessment outputs to code releases
+
+The code used to compute an indicator assessment is not reproducible unless the exact input data that was used is maintained alongside the code. Most of the time, new assessments will be triggered by new data versions. Therefore it is important that the input data used in past assessments are not replaced when new assessments are done, but maintained as separate, immutable data files.
+
+Secondly, input data from each assessment need to be stored in a secure space. Most of the time, it is not possible to store input data directly in code repositories (in which case the input data will be preserved alongside the code in the release), because data files typically exceed GitHub's 100 MB file size limit. Input data snapshots that are too large to be accommodated inside Git repositories therefore need to be stored in separate data repositories, but it must still be possible to trace the exact data snapshot that was used in the assessment.
+
+#### What is a data repository
+
+A data repository is a digital space where data can be securely stored long-term, without the risk of loss, theft or data corruption. Data repositories can be privately maintained (e.g. Dropbox, Google Drive) or institutionally provided (e.g. SANBI NBA OneDrive, FigShare), and can be public or private, depending on data sensitivity. They are typically cloud-based, to that they are less vulnerable to loss of storage devices or hard drive crashes.
+
+Some systems, especially those specifically designed as archival repositories, can automatically track data file versions, but if your chosen data repository does not provide such functionality, you need to implement a more manual approach to managing data file versions. This can be including the assessment release tag in the file name, or creating a folder for each assessment with the release tag in the folder name. The latter option may be preferable as it does not require code adjustments for reading in data files for each assessment.
+
+#### Managing assessment outputs
+
+If your assessment outputs any data products, for example a map or a spreadsheet of computed indicator values, and these are stored separately from your analytical code repository - for example in your content repository because it supports the creation of a figure or table on your content page, then it may be necessary to either tag these files with the same assessment release tag as well (if they are in a different repository), or make sure that they are stored in your data repository alongside your input data snapshots.
+
+#### Bringing it all together with an assessment.yml
