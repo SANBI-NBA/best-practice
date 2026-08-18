@@ -113,6 +113,26 @@ A template for an assessment metadata YAML file is included in this best practic
 
 ### Maintaining code reproducibility with renv
 
+Our R code is dependent on packages that are maintained by independent institutions and developers, and over time, packages change, dependencies are deprecated, and other updates are implemented which can lead to R code no longer functioning when you try to run it on newer installations of operating systems, R versions, or even newer versions of RStudio. The [renv package](https://rstudio.github.io/renv/articles/renv.html) helps you to create reproducible environments for R projects that can help sustain the functionality of R code. It also enables collaboration by allowing collaborators to replicate the exact R environment on different computers.
+
+#### Setting up renv
+
+1.  Make sure renv package is installed `install.packages("renv")`.
+
+2.  Initialise renv by typing `renv::init()` in the R console. This creates several additional files and folders within your project for tracking packages and versions used in your project. Do not commit everything to your repository - the important files are `renv.lock`, `.Rprofile`, `renv/settings.json` and `renv/activate.R`. Luckily renv automatically creates a handy .gitignore file within the renv folder to make sure that only these files are committed.
+
+3.  Once your coding is done and you have a good idea which packages you will be using, run `renv::snapshot()`. This records all the packages and versions in use in the project in the library folder. renv is set up to configure the project according to the information in the renv.lock file every time you start up the project. If you don't want it to apply this environment, you can turn renv off with `renv::deactivate()`.
+
+#### Configuring a renv environment on a different computer
+
+1.  Clone or pull the relevant repository.
+2.  Make sure renv is installed.
+3.  Run `renv::activate()`, then `renv::restore()`. This initiates a long process where it goes and fetches the exact version of all the packages it can find as listed in the lock file and creates a package library for the project. If there are some packages where it can’t find the exact version it will ask if it can install the latest version of the package – saying yes seems to work fine here. Then it comes up with a list of packages it can’t install, including nbaR. With renv activated, install nbaR as usual - `devtools::install_github("SANBI-NBA/nbaR")`.
+
+::: callout-tip
+Using renv creates package libraries for each project, which can cause a lot of duplication if you use the same packages in most of your projects. A way around this is to use `renv::install()` instead of `install.packages()`. renv's own install checks if the package already exists somewhere and creates a link to the global cache, rather than re-downloading and installing multiple copies. Read more at the [renv vignette](https://rstudio.github.io/renv/articles/renv.html#infrastructure).
+:::
+
 ### Steps to follow when updating content
 
 ::: callout-note
@@ -133,7 +153,7 @@ Note these steps assume you are starting from a correctly documented and archive
 
 5.  Run `renv::snapshot()` to record input package versions. If it is your first time using renv, set it up following the instructions above.
 
-6.  Update `assessment.yml` - decide on what your release tag will be and add it to this file.
+6.  Create or update `assessment.yml` - decide on what your release tag will be and add it to this file.
 
 7.  Commit and push new versions of `renv.lock` and `assessment.yml`
 
